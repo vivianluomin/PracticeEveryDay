@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TestDrawerLayout</string>
+    <string name="opendrawer">我的主页</string>
+    <string name="closedrawer">我的内容</string>
+</resources>
