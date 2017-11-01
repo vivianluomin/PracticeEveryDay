@@ -17,8 +17,10 @@ import android.os.Bundle;
 import android.util.Property;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
+import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.LinearInterpolator;
+import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -31,7 +33,7 @@ import android.widget.RelativeLayout;
 public class MainActivity extends AppCompatActivity
         implements  View.OnClickListener,CheckBox.OnCheckedChangeListener{
 
-    private ImageView mBall;
+    private Button mBall;
     private LinearLayout mLaout;
     private Button mBtn;
     private GridLayout mGridView;
@@ -46,9 +48,9 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mBall = (ImageView)findViewById(R.id.iv_image);
+        mBall = (Button)findViewById(R.id.iv_image);
 //        mBall2 = (ImageView)findViewById(R.id.iv_image1);
-       mLaout = (LinearLayout) findViewById(R.id.rl_layout);
+       //mLaout = (LinearLayout) findViewById(R.id.rl_layout);
 //        mBtn = (Button)findViewById(R.id.btn_add);
 //        mBtn.setOnClickListener(this);
 //        mGridView = (GridLayout) findViewById(R.id.gv_gridView);
@@ -65,6 +67,36 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    public  void  ViewSetter(View view){
+//        ViewWrap wrap = new ViewWrap(mBall);
+        ObjectAnimator.ofFloat(mBall,"width",500)
+                .setDuration(5000)
+                .start();
+        mBall.setWidth(100);
+
+//        ScaleAnimation scaleAnimation  = new
+//                ScaleAnimation(1.0f,3.0f,1.0f,1.0f,
+//                Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
+//        scaleAnimation.setDuration(5000);
+//        mBall.startAnimation(scaleAnimation);
+
+
+
+    }
+
+    public   class ViewWrap{
+        private View mTarget;
+        public ViewWrap(View view){
+            mTarget = view;
+        }
+        public int getWdith(){
+            return  mTarget.getLayoutParams().width;
+        }
+        public  void  setWidth(float width){
+            mTarget.getLayoutParams().width = (int) width;
+            mTarget.requestLayout();
+        }
+    }
 
    public void ViewAnim(final View view){
        mBall.animate()
