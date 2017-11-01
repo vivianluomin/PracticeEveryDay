@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <objectAnimator
+
+        android:propertyXName= "rotationX"
+        android:duration="1000"
+        android:valueType="floatType"
+        android:valueFrom="360"
+        android:valueTo="0"
+
+        />
+
+</set>
