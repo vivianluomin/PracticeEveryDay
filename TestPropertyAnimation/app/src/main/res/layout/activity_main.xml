@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rl_layout"
+    android:orientation="vertical"
+    tools:context="com.example.asus1.testpropertyanimation.MainActivity">
+
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/btn_add"-->
+        <!--android:text="AddItem"-->
+
+        <!--/>-->
+
+    <!--<CheckBox-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/cb_1"-->
+        <!--android:text="LayoutTransition.APPEARING"-->
+        <!--/>-->
+    <!--<CheckBox-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/cb_2"-->
+        <!--android:text="LayoutTransition.CHANGR_APPEARING"-->
+        <!--/>-->
+    <!--<CheckBox-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/cb_3"-->
+        <!--android:text="LayoutTransition.DISAPPEARING"-->
+        <!--/>-->
+    <!--<CheckBox-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/cb_4"-->
+        <!--android:text="LayoutTransition.CHANGE.DISAPPEARING"-->
+        <!--/>-->
+
+    <!--<GridLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/gv_gridView"-->
+        <!--android:numColumns="5"-->
+        <!--android:layout_marginTop="15dp"-->
+        <!--&gt;-->
+
+    <!--</GridLayout>-->
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/iv_image"
+        android:src="@drawable/day"
+        android:onClick="ViewAnim"
+        android:background="#666"
+        />
+</LinearLayout>
