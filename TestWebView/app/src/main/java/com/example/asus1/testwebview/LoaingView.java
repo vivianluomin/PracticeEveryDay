@@ -212,9 +212,7 @@ public class LoaingView extends View {
         invalidate();
     }
 
-//    public  void Loading(){
-//        postInvalidateDelayed(10);
-//    }
+
 
     public void  setLoadingFinish(){
         mLoadingStart = false;

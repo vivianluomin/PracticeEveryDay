@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="#fff"
     tools:context="com.example.asus1.testwebview.MainActivity">
 
     <TextView
@@ -16,16 +16,33 @@
         android:background="#8EE5EE"
         android:textColor="#fff"
         android:textSize="18sp"
-        android:text="百度"
+        android:text=""
         android:paddingLeft="15dp"
         android:gravity="center_vertical"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_startloading"
+        android:layout_below="@id/tv_title"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_loading"
+        android:text=""
+        android:layout_below="@id/tv_startloading"
+        />
+
+
        <WebView
            android:layout_width="match_parent"
-           android:layout_height="0dp"
-           android:layout_weight="1"
+           android:layout_height="match_parent"
            android:id="@+id/wv_webview"
+           android:layout_below="@id/tv_title"
+           android:visibility="gone"
            />
 
-</LinearLayout>
+</RelativeLayout>
