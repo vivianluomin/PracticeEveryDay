@@ -5,19 +5,70 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/ll_layout"
     tools:context="com.example.asus1.webviewandjavascripter.MainActivity">
 
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_callJs"
-        android:text="调用JS"
+        android:background="#ddd"
+        >
 
-        />
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/iv_addTitle"
+            android:scaleType="center"
+            android:src="@mipmap/ic_title"
+            />
+
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/iv_bold"
+            android:scaleType="center"
+            android:src="@mipmap/ic_bold1"
+            />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/iv_deleteLine"
+            android:scaleType="center"
+            android:src="@mipmap/ic_deletline1"
+            />
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/iv_size"
+            android:scaleType="center"
+            android:src="@mipmap/ic_size"
+            />
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/iv_frontColor"
+            android:scaleType="center"
+            android:src="@mipmap/ic_frontcolor1"
+            />
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/iv_addImage"
+            android:scaleType="center"
+            android:src="@mipmap/ic_image2"
+            />
+
+
+
+    </LinearLayout>
 
    <WebView
        android:layout_width="match_parent"
-       android:layout_height="match_parent"
+       android:layout_height="0dp"
+       android:layout_weight="1"
        android:id="@+id/wv_webview"
        >
 

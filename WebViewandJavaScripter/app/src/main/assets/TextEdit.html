@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset = "utf-8"/>
+
+
+    <script>
+
+		function Bold() {
+            var aa = document.execCommand("Bold", "false", null);
+
+        }
+
+		 function  AddImage(param){
+
+			document.execCommand("InsertImage", "false", param);
+			test.hello(param);
+		}
+
+		function  deleteLine(){
+			 document.execCommand("StrikeThrough",false,null);
+		}
+
+		function size(param){
+		 document.execCommand("FontSize",false,param);
+
+		}
+
+		function AddTitle(){
+
+		document.execCommand("FontSize",false,7);
+		}
+
+		function setFontColor(param){
+		document.execCommand("ForeColor",false,param);
+
+		}
+
+    </script>
+
+</head>
+
+
+<body>
+
+
+
+
+<div contenteditable = "true"  width= "500px">
+
+    <p>
+        请输入... ....
+    </p>
+
+
+</div>
+
+</body>
+
+
+
+</html>

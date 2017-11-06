@@ -10,7 +10,11 @@
 <script>
 
 function callJS(){
-alert("Android调用了JS的callJs方法");
+var result = prompt("请输入你的用户名","tom");
+if(result != null && result!=""){
+ test.hello(result);
+ document.getElementById("pp").innerHTML = result+"，你好";
+}
 }
 
 </script>
@@ -18,6 +22,8 @@ alert("Android调用了JS的callJs方法");
 <body>
 
 <button type = "button" id = "button1"  onclick = "callJS()">调用JS的代码</button>
+
+<p id="pp"></p>
 
 </body>
 
