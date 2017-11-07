@@ -7,4 +7,5 @@
     android:background="#00000000"
     tools:context="com.example.asus1.webviewandjavascripter.ChoseImageActivity">
 
+
 </LinearLayout>

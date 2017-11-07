@@ -3,4 +3,16 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="红色">#f00</color>
+    <color name="蔷薇色">#f05b72</color>
+    <color name="珊瑚色">#f8aba6</color>
+    <color name="橙色">#f47920</color>
+    <color name="茶色">#8f4b2e</color>
+    <color name="土器色">#ae6642</color>
+    <color name="缥色">#228fdb</color>
+    <color name="薄绿色">#1d953f</color>
+    <color name="青绿色">#00ae9d</color>
+    <color name="藤纳色">#6a6da9</color>
+    <color name="紫色">#472d56</color>
+
 </resources>

@@ -12,11 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ddd"
+        android:columnCount="7"
         >
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:id="@+id/iv_addTitle"
             android:scaleType="center"
             android:src="@mipmap/ic_title"
@@ -24,46 +25,64 @@
 
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:id="@+id/iv_bold"
             android:scaleType="center"
             android:src="@mipmap/ic_bold1"
             />
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:id="@+id/iv_deleteLine"
             android:scaleType="center"
             android:src="@mipmap/ic_deletline1"
             />
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:id="@+id/iv_size"
             android:scaleType="center"
             android:src="@mipmap/ic_size"
             />
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:id="@+id/iv_frontColor"
             android:scaleType="center"
             android:src="@mipmap/ic_frontcolor1"
             />
 
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:id="@+id/iv_addImage"
             android:scaleType="center"
             android:src="@mipmap/ic_image2"
             />
 
 
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/iv_return"
+            android:scaleType="center"
+            android:src="@mipmap/ic_chushi1"
+            />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/iv_save"
+            android:scaleType="center"
+            android:src="@mipmap/ic_save"
+            />
+
+
 
     </LinearLayout>
+
 
    <WebView
        android:layout_width="match_parent"

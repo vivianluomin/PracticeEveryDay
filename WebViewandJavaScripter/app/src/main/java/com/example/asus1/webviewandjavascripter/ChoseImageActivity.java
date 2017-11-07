@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
@@ -36,7 +37,8 @@ public class ChoseImageActivity extends AppCompatActivity implements  DialogInte
     private File mOutPutFile;
 
     private  String mOutPutPath ;
-    private Uri mCropImageUri;
+    private Uri mResultUri;
+
 
 
     @Override
@@ -53,7 +55,7 @@ public class ChoseImageActivity extends AppCompatActivity implements  DialogInte
                 .setPositiveButton("打开相册", this)
                 .setNegativeButton("拍照", this);
         builder.create().show();
-        mOutPutPath = getCacheDir().getPath()+"//"+System.currentTimeMillis()+".png";
+        mOutPutPath = Environment.getExternalStorageDirectory()+"//"+System.currentTimeMillis()+".png";
     }
 
     @Override
@@ -69,7 +71,7 @@ public class ChoseImageActivity extends AppCompatActivity implements  DialogInte
     }
 
     private void  openAlbum(){
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent,OPENALBUM3);
     }
@@ -88,18 +90,17 @@ public class ChoseImageActivity extends AppCompatActivity implements  DialogInte
                     }
                 }
 
+                Intent intent = new Intent();
+                intent.setData(mResultUri);
+                setResult(RESULT,intent);
+
+                finish();
+
+
                 break;
             case OPENCAERAM3:
 
                 break;
-
-            case CROP:
-                    Log.d("CropPath",mCropImageUri.toString());
-                    Intent intent = new Intent();
-                    intent.setData(mCropImageUri);
-                    setResult(RESULT,intent);
-
-                finish();
 
 
         }
@@ -132,10 +133,10 @@ public class ChoseImageActivity extends AppCompatActivity implements  DialogInte
         }
 
         if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.N){
-            startPhotoZoom(getImageContentUri(this,imagePath));
+            mResultUri = getImageContentUri(this,imagePath);
         }else{
             Uri uri = Uri.fromFile(new File(imagePath));
-            startPhotoZoom(uri);
+            mResultUri = uri;
         }
 
 
@@ -146,7 +147,7 @@ public class ChoseImageActivity extends AppCompatActivity implements  DialogInte
         String imagePath = getImagePath(path,null);
         Log.d("Path",imagePath);
         Uri uri = Uri.parse(imagePath);
-        startPhotoZoom(uri);
+        mResultUri = uri;
     }
 
     private String getImagePath(Uri uri ,String selection){
@@ -197,7 +198,7 @@ public class ChoseImageActivity extends AppCompatActivity implements  DialogInte
                 mOutPutFile.delete();
             }
             mOutPutFile.createNewFile();
-            mCropImageUri = Uri.fromFile(mOutPutFile);
+            mResultUri = Uri.fromFile(mOutPutFile);
             intent.setDataAndType(uri,"image/*");
             //crop为true是设置在开启的intent中设置的View可以裁剪
             intent.putExtra("crop","true");
@@ -207,8 +208,8 @@ public class ChoseImageActivity extends AppCompatActivity implements  DialogInte
             intent.putExtra("outputX",100);
             intent.putExtra("outputY",100);
             intent.putExtra("return-data",true);
-            intent.putExtra("onFaceDetection",true);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT,mCropImageUri);
+            intent.putExtra("onFaceDetection",false);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT,mResultUri);
             intent.putExtra("outputFormat", Bitmap.CompressFormat.PNG.toString());
             startActivityForResult(intent,CROP);
         }catch (IOException e){

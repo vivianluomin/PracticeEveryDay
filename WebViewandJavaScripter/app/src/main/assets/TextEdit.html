@@ -4,38 +4,75 @@
 <head>
 
     <meta charset = "utf-8"/>
+    <meta name="viewport" content="width=device-width,
+     initial-scale=1.0, minimum-scale=1.0,
+     maximum-scale=1.0, user-scalable=no">
 
+
+    <style>
+        img{
+           border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+            width: 80px;
+            height: 80px;
+
+        }
+
+        div{
+         border: 1px solid #00868B;
+         fontSize: 16sp;
+          padding:10px 5px;
+          fontFamily :Arial;
+
+        }
+    </style>
 
     <script>
 
 		function Bold() {
+
             var aa = document.execCommand("Bold", "false", null);
 
         }
 
 		 function  AddImage(param){
 
-			document.execCommand("InsertImage", "false", param);
-			test.hello(param);
+
+			var img = document.createElement("img");
+			img.src = param;
+
+			document.getElementById("editText").appendChild(img);
+
 		}
 
 		function  deleteLine(){
+
 			 document.execCommand("StrikeThrough",false,null);
 		}
 
 		function size(param){
+
 		 document.execCommand("FontSize",false,param);
 
 		}
 
 		function AddTitle(){
 
-		document.execCommand("FontSize",false,7);
+		document.execCommand("FontSize",false,5);
+
 		}
 
 		function setFontColor(param){
+
 		document.execCommand("ForeColor",false,param);
 
+		}
+
+		function Init(){
+		document.getElementById("editText").style.fontSize = "4";
+		 document.getElementById("editText").style.fontColor = "#fff";
+		 document.getElementById("editText").style.fontFamily = "Arial";
 		}
 
     </script>
@@ -48,11 +85,12 @@
 
 
 
-<div contenteditable = "true"  width= "500px">
+<div contenteditable = "true"  width= "400px"
+    id="editText"
+>
 
-    <p>
-        请输入... ....
-    </p>
+
+    请输入... ....
 
 
 </div>
