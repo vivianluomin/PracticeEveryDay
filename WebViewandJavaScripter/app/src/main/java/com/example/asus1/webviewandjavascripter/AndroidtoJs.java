@@ -18,6 +18,7 @@ public class AndroidtoJs {
         mContext = context;
     }
 
+    //必须加这个，代表JS要调用的
     @JavascriptInterface
     public  void  hello(String s){
         Toast.makeText(mContext,s,Toast.LENGTH_SHORT).show();

@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.JsPromptResult;
 import android.webkit.JsResult;
+import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
     private ImageView mAddTitle;
     private ImageView mInit;
     private ImageView mSave;
+    private Button mBtn;
     private String[] mColors = {
      "#f00",
    "#f05b72",
@@ -69,6 +71,8 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 
         init();
 
+        //testJStoAndroid();
+        //textEvaluate();
         setWebView();
 
 
@@ -80,6 +84,18 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 
         mWebView = (WebView)findViewById(R.id.wv_webview);
         mRootLayout = (LinearLayout)findViewById(R.id.ll_layout);
+//        mBtn = (Button)findViewById(R.id.btn);
+//        mBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mWebView.evaluateJavascript("javascript:callJS()", new ValueCallback<String>() {
+//                    @Override
+//                    public void onReceiveValue(String value) {
+//
+//                    }
+//                });
+//            }
+//        });
 
         mBold = (ImageView)findViewById(R.id.iv_bold);
         if(mBold!=null){
@@ -121,15 +137,18 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 
 
         mSettings = mWebView.getSettings();
+        //让webView自适应屏幕
         mSettings.setUseWideViewPort(true);
         mSettings.setLoadWithOverviewMode(true);
         mSettings.setLoadsImagesAutomatically(true);
+        //不支持缩放
         mSettings.setSupportZoom(false);
+        //设置与JS交互的权限
         mSettings.setJavaScriptEnabled(true);
-
-        mWebView.addJavascriptInterface(new AndroidtoJs(MainActivity.this),"test");
         mWebView.loadUrl("file:///android_asset/TextEdit.html");
 
+
+        mWebView.addJavascriptInterface(new AndroidtoJs(MainActivity.this),"test");
 
     }
 
@@ -293,5 +312,65 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
                 mWebView.loadUrl("javascript:setFontColor(\""+mColors[id]+"\")");
             }
         });
+    }
+
+
+    private void textEvaluate(){
+        mSettings = mWebView.getSettings();
+        //让webView自适应屏幕
+        mSettings.setUseWideViewPort(true);
+        mSettings.setLoadWithOverviewMode(true);
+        mSettings.setLoadsImagesAutomatically(true);
+        //不支持缩放
+        mSettings.setSupportZoom(false);
+        //设置与JS交互的权限
+        mSettings.setJavaScriptEnabled(true);
+
+        mSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+
+        mWebView.loadUrl("file:///android_asset/javascript.html");
+
+
+        mWebView.setWebChromeClient(new WebChromeClient(){
+            //拦截JS的prompt的对话框，其实这里应该弄一个dialog，让其输入
+            @Override
+            public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
+
+               mBtn.setText(message);
+                result.confirm("VIVIAN");
+                return true;
+            }
+        });
+    }
+
+    private void testJStoAndroid(){
+        mSettings = mWebView.getSettings();
+        //让webView自适应屏幕
+        mSettings.setUseWideViewPort(true);
+        mSettings.setLoadWithOverviewMode(true);
+        mSettings.setLoadsImagesAutomatically(true);
+        //不支持缩放
+        mSettings.setSupportZoom(false);
+        //设置与JS交互的权限
+        mSettings.setJavaScriptEnabled(true);
+
+        mWebView.loadUrl("file:///android_asset/JStoAndroid.html");
+
+       /// mWebView.addJavascriptInterface(new AndroidtoJs(MainActivity.this),"test");
+
+        mWebView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+
+                if(Uri.parse(url).getHost().equals("www.baidu.com")){
+                   mWebView.loadUrl(url);
+                    return  true;
+                }
+
+                return false;
+            }
+        });
+
+
     }
 }

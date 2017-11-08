@@ -4,24 +4,22 @@
 <head>
 
 <meta charset = "utf-8"/>
-<title>Carson_Ho</title>
+<title>Vivian</title>
 
 
 <script>
 
 function callJS(){
-var result = prompt("请输入你的用户名","tom");
+var result = prompt("请输入你的用户名");
 if(result != null && result!=""){
- test.hello(result);
  document.getElementById("pp").innerHTML = result+"，你好";
 }
+return result;
 }
 
 </script>
 </head>
 <body>
-
-<button type = "button" id = "button1"  onclick = "callJS()">调用JS的代码</button>
 
 <p id="pp"></p>
 
