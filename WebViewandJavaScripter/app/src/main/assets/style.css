@@ -1,0 +1,34 @@
+
+@charset "UTF-8";
+  html{
+
+    height:100%;
+  }
+
+
+  img{
+         border: 1px solid #ddd;
+          border-radius: 4px;
+          padding: 5px;
+          width: 80px;
+          height: 80px;
+
+        }
+
+        div{
+
+        outline:0px solid transparent;
+        background-repeat:no-repeat;
+        background-position:center;
+        background-size:cover;
+         fontSize: 16sp;
+          padding:10px 5px;
+          fontFamily :Arial;
+
+        }
+
+        #editText[placeholder]:empty:not(:focus):before{
+
+            content:attr(placeholder);
+           opacity:5;
+        }

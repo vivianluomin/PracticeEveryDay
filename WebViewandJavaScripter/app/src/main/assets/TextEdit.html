@@ -7,26 +7,9 @@
     <meta name="viewport" content="width=device-width,
      initial-scale=1.0, minimum-scale=1.0,
      maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="style.css">
 
 
-    <style>
-        img{
-           border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 5px;
-            width: 80px;
-            height: 80px;
-
-        }
-
-        div{
-         border: 1px solid #00868B;
-         fontSize: 16sp;
-          padding:10px 5px;
-          fontFamily :Arial;
-
-        }
-    </style>
 
     <script>
 
@@ -65,14 +48,23 @@
 
 		function setFontColor(param){
 
-		document.execCommand("ForeColor",false,param);
+        var boolean =document.execCommand("ForeColor",false,param);
 
+
+        return boolean;
 		}
 
 		function Init(){
-		document.getElementById("editText").style.fontSize = "4";
-		 document.getElementById("editText").style.fontColor = "#fff";
-		 document.getElementById("editText").style.fontFamily = "Arial";
+
+		document.execCommand("ForeColor",false,"#000");
+		document.execCommand("FontSize",false,4);
+
+		}
+
+		function Save(param){
+		var boolean = document.execCommand("SaveAs",false,param);
+
+		return boolean;
 		}
 
     </script>
@@ -84,12 +76,14 @@
 
 
 
-
 <div contenteditable = "true"  width= "400px"
     id="editText"
 >
 
-    请输入... ....
+
+        请输入... ...
+
+
 </div>
 
 </body>

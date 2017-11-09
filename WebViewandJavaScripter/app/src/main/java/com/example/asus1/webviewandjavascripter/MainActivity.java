@@ -30,7 +30,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -176,12 +178,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 
                 break;
             case R.id.iv_size:
-                mWebView.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        mWebView.loadUrl("javascript:size(4)");
-                    }
-                });
+               showFontSize(v);
 
                 break;
 
@@ -212,6 +209,32 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
                 });
                 break;
             case R.id.iv_save:
+                File file = new File(getFilesDir().getAbsolutePath()+"//test.html");
+                Log.d("file",file.getAbsolutePath());
+                if(file.exists()){
+                    file.delete();
+
+                }
+
+                try {
+                    file.createNewFile();
+                    mWebView.evaluateJavascript("javascript:Save(\'"+"file://"+file.getAbsolutePath()+"\')", new ValueCallback<String>() {
+                        @Override
+                        public void onReceiveValue(String value) {
+                            if(value.equals("true")){
+                                Toast.makeText(MainActivity.this,"保存成功",Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(MainActivity.this,"保存失败",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }catch (IOException e){
+                    e.printStackTrace();
+                    Toast.makeText(MainActivity.this,"文件创建失败",Toast.LENGTH_SHORT).show();
+
+                }
+
+
                 break;
 
         }
@@ -246,6 +269,48 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
                 mWebView.loadUrl("javascript:AddImage(\'"+path.toString()+"\')");
             }
         });
+    }
+
+    private void showFontSize(View view){
+        PopupMenu popupMenu = new PopupMenu(this,view);
+        MenuInflater inflater = popupMenu.getMenuInflater();
+        inflater.inflate(R.menu.fontsizemenu,popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                switch (item.getItemId()){
+                    case R.id.font1:
+                        setFontSize(1);
+                        break;
+                    case R.id.font2:
+                        setFontSize(2);
+                        break;
+                    case R.id.font3:
+                        setFontSize(3);
+                        break;
+                    case R.id.font4:
+                        setFontSize(4);
+                        break;
+                    case R.id.font5:
+                        setFontSize(5);
+                        break;
+                    case R.id.font6:
+                        setFontSize(6);
+                        break;
+                    case R.id.font7:
+                        setFontSize(7);
+                        break;
+
+
+
+                }
+
+                return true;
+            }
+        });
+
+        popupMenu.show();
     }
 
     private void  showColors(View view){
@@ -305,13 +370,33 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         popupMenu.show();
     }
 
-    private void setColor(final int id){
+    private void  setFontSize(final int i){
+
+
         mWebView.post(new Runnable() {
             @Override
             public void run() {
-                mWebView.loadUrl("javascript:setFontColor(\""+mColors[id]+"\")");
+                mWebView.loadUrl("javascript:size("+i+")");
             }
         });
+
+    }
+
+    private void setColor(final int id){
+
+        mWebView.evaluateJavascript("javascript:setFontColor(\"" + mColors[id] + "\")", new ValueCallback<String>() {
+            @Override
+            public void onReceiveValue(String value) {
+                Log.d("color",value);
+            }
+        });
+
+//        mWebView.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                mWebView.loadUrl("javascript:setFontColor(\""+mColors[id]+"\")");
+//            }
+//        });
     }
 
 
