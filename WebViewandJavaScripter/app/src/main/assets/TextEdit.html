@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html id="content">
 
 <head>
 
@@ -7,11 +7,66 @@
     <meta name="viewport" content="width=device-width,
      initial-scale=1.0, minimum-scale=1.0,
      maximum-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" type="text/css" href="style.css">
+
+<style>
+     html{
+
+    height:100%;
+    }
+
+
+    img{
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 80px;
+    height: 80px;
+
+    }
+
+    div{
+
+    outline:0px solid transparent;
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size:cover;
+    fontSize: 16sp;
+    padding:10px 5px;
+    fontFamily :Arial;
+
+    }
+
+    #editText[placeholder]:empty:not(:focus):before{
+
+    content:attr(placeholder);
+    opacity:5;
+    }
+
+</style>
 
 
 
-    <script>
+
+</head>
+
+
+<body>
+
+
+
+<div contenteditable = "true"  width= "400px"
+    id="editText"
+>
+
+
+        请输入... ...
+
+
+</div>
+
+</body>
+
+<script>
 
 		function Bold() {
 
@@ -61,33 +116,14 @@
 
 		}
 
-		function Save(param){
-		var boolean = document.execCommand("SaveAs",false,param);
+		function Save(){
 
-		return boolean;
+		var content = document.getElementById("content").innerHTML;
+		save.SaveFile(content);
+
 		}
 
     </script>
-
-</head>
-
-
-<body>
-
-
-
-<div contenteditable = "true"  width= "400px"
-    id="editText"
->
-
-
-        请输入... ...
-
-
-</div>
-
-</body>
-
 
 
 </html>

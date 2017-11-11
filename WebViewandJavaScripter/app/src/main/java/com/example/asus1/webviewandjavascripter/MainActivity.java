@@ -149,6 +149,9 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         mSettings.setJavaScriptEnabled(true);
         mWebView.loadUrl("file:///android_asset/TextEdit.html");
 
+        SaveFileInterface save = new SaveFileInterface(MainActivity.this,
+                getFilesDir().getAbsolutePath()+"//test.html");
+        mWebView.addJavascriptInterface(save,"save");
 
         mWebView.addJavascriptInterface(new AndroidtoJs(MainActivity.this),"test");
 
@@ -209,31 +212,13 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
                 });
                 break;
             case R.id.iv_save:
-                File file = new File(getFilesDir().getAbsolutePath()+"//test.html");
-                Log.d("file",file.getAbsolutePath());
-                if(file.exists()){
-                    file.delete();
 
-                }
+                mWebView.evaluateJavascript("javascript:Save()", new ValueCallback<String>() {
+                    @Override
+                    public void onReceiveValue(String value) {
 
-                try {
-                    file.createNewFile();
-                    mWebView.evaluateJavascript("javascript:Save(\'"+"file://"+file.getAbsolutePath()+"\')", new ValueCallback<String>() {
-                        @Override
-                        public void onReceiveValue(String value) {
-                            if(value.equals("true")){
-                                Toast.makeText(MainActivity.this,"保存成功",Toast.LENGTH_SHORT).show();
-                            }else {
-                                Toast.makeText(MainActivity.this,"保存失败",Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-                }catch (IOException e){
-                    e.printStackTrace();
-                    Toast.makeText(MainActivity.this,"文件创建失败",Toast.LENGTH_SHORT).show();
-
-                }
-
+                    }
+                });
 
                 break;
 
