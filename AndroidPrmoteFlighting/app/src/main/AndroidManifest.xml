@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.asus1.androidprmoteflighting">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SecondActivity"
+            android:configChanges="screenLayout"
+            android:label="@string/app_name"
+            android:process=":remote" />
+        <activity
+            android:name=".ThirdActivity"
+            android:configChanges="screenLayout"
+            android:label="@string/app_name"
+            android:process="com.example.asus1.androidprmoteflighting.remote" />
+
+        <!-- <service -->
+        <!-- android:name=".MessengerService" -->
+        <!-- android:process=":remote" /> -->
+
+
+        <!-- <service -->
+        <!-- android:name=".AIDLTest.BookManagerService" -->
+        <!-- android:process=":remote" /> -->
+
+        <activity android:name=".AIDLTest.BookManagerActivity" />
+
+        <service
+            android:name=".AIDLTest.BinderPoolSerivce"
+            android:process=":remote" />
+
+        <activity android:name=".AIDLTest.BinderPoolActivity" />
+        <activity android:name=".ViewText.DemoActivity_1"></activity>
+    </application>
+
+</manifest>
