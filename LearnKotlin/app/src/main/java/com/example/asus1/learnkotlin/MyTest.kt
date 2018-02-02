@@ -5,10 +5,13 @@ package com.example.asus1.learnkotlin
  */
 
 interface MyInterface{
-    val prop:Int
+//    val prop:Int
+//
+//    val propertyWithImplementation:String
+//    get() = "foo"
 
-    val propertyWithImplementation:String
-    get() = "foo"
+    fun  Action()
+
 
 }
 

@@ -1,7 +1,12 @@
 package com.example.asus1.learnkotlin
 
+import android.net.wifi.p2p.WifiP2pManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.TextView
+import java.util.*
+
 const  val  string : String = "ABC"
 
 class MainActivity : AppCompatActivity() {
@@ -12,6 +17,14 @@ class MainActivity : AppCompatActivity() {
         this[index2] = temp
     }
 
+
+    var string:String = ""
+    get() = this.toString()
+    set(value) {
+        if (field!=("")){
+            field = value
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -29,16 +42,31 @@ class MainActivity : AppCompatActivity() {
 //        val list = mutableListOf<Int>(1,2,3)
 //        list.swap(0,2)
 
+        var mTextView = findViewById<TextView>(R.id.tv_textview)
 
-        var user = User("vivian",21)
-        var (name,age) = user
-        println("user's name is $name and age is $age")
-      user =   user.copy(age = 22)
-        var (name1,age1) = user
-        println("user's name is $name1 and age is $age1")
+//        mTextView.setOnClickListener { view: View? -> println("click") }
+//
+//
+//
+//        var user = User("vivian",21)
+//        var (name,age) = user
+//        println("user's name is $name and age is $age")
+//      user =   user.copy(age = 22)
+//        var (name1,age1) = user
+//        println("user's name is $name1 and age is $age1")
+//
+//        var person  = Person("vivian2",18)
+//        println("person's name is ${person.name},age is ${person.age}")
 
-        var person  = Person("vivian2",18)
-        println("person's name is ${person.name},age is ${person.age}")
+
+
+        val lazyValue:String by lazy {
+            println("computed!")
+            "Hello"
+        }
+
+        println(lazyValue)
+        println(lazyValue)
 
 
 
