@@ -17,18 +17,28 @@ class MainActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val s = describe("Hello")
-        println(s)
-        var  a = hasPrefix1(1)
-        println(a)
+//        val s = describe("Hello")
+//        println(s)
+//        var  a = hasPrefix1(1)
+//        println(a)
 
 //        var c = C()
 //        c.foo()
 //        c.foo(1)
 
-        val list = mutableListOf<Int>(1,2,3)
-        list.swap(0,2)
+//        val list = mutableListOf<Int>(1,2,3)
+//        list.swap(0,2)
 
+
+        var user = User("vivian",21)
+        var (name,age) = user
+        println("user's name is $name and age is $age")
+      user =   user.copy(age = 22)
+        var (name1,age1) = user
+        println("user's name is $name1 and age is $age1")
+
+        var person  = Person("vivian2",18)
+        println("person's name is ${person.name},age is ${person.age}")
 
 
 
