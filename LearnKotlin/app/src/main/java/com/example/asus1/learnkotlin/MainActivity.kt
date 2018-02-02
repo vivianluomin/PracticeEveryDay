@@ -6,6 +6,12 @@ const  val  string : String = "ABC"
 
 class MainActivity : AppCompatActivity() {
 
+    fun MutableList<Int>.swap(index1:Int,index2:Int){
+        val temp = this[index1]
+        this[index1] = this[index2]
+        this[index2] = temp
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -15,6 +21,14 @@ class MainActivity : AppCompatActivity() {
         println(s)
         var  a = hasPrefix1(1)
         println(a)
+
+//        var c = C()
+//        c.foo()
+//        c.foo(1)
+
+        val list = mutableListOf<Int>(1,2,3)
+        list.swap(0,2)
+
 
 
 
@@ -46,6 +60,8 @@ class MainActivity : AppCompatActivity() {
 
         var b = Array(3,{i->(i*2)})
         println(""+ b[0]+" "+b[1])
+
+
 
 
     }
