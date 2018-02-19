@@ -5,8 +5,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PixelFormat;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -49,6 +51,8 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,Runnab
         setFocusable(true);
         setFocusableInTouchMode(true);
         this.setKeepScreenOn(true);
+        this.setZOrderOnTop(true);
+        mHolder.setFormat(PixelFormat.TRANSPARENT);
     }
 
 
@@ -56,10 +60,14 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,Runnab
     public void surfaceCreated(SurfaceHolder holder) {
         mIsdrawing = true;
         mPath = new Path();
+        mPath.moveTo(0,100);
         mPaint = new Paint();
         mPaint.setColor(Color.BLUE);
         mPaint.setDither(true);
         mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(5);
+        mPaint.setAntiAlias(true);
+
         new Thread(this).start();
 
     }
@@ -82,14 +90,14 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,Runnab
             long startTime = System.currentTimeMillis();
             synchronized (mHolder){
                 mCanvas = mHolder.lockCanvas();
-                if(x<=getWidth()){
-                    x+=1;
-
-                }else{
-                    x = 1;
-                }
-                y = (int)(100*Math.sin(x*2*Math.PI/180)+400);
-                mPath.lineTo(x,y);
+//                if(x<=getWidth()){
+//                    x+=1;
+//
+//                }else{
+//                    x = 1;
+//                }
+//                y = (int)(100*Math.sin(x*2*Math.PI/180)+400);
+//                mPath.lineTo(x,y);
                 mCanvas.drawPath(mPath,mPaint);
 
                 mHolder.unlockCanvasAndPost(mCanvas);
@@ -104,6 +112,28 @@ public class MyView extends SurfaceView implements SurfaceHolder.Callback,Runnab
         }
 
 
+    }
+
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        int x = 0;
+        int y = 0;
+        x = (int) (event.getX());
+        y = (int)event.getY();
+        switch (event.getAction()){
+            case MotionEvent.ACTION_DOWN:
+                mPath.moveTo(x,y);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                mPath.lineTo(x,y);
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+        }
+
+        return true;
     }
 
     @Override
