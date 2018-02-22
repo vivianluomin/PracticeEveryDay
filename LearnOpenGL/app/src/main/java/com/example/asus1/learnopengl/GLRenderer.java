@@ -23,6 +23,18 @@ public class GLRenderer implements GLSurfaceView.Renderer {
     private float mScalef = 1;
     private float mDegree = 0;
 
+    float[] ambient = {0.9f, 0.9f, 0.9f, 1.0f,};
+    float[] diffuse = {0.5f, 0.5f, 0.5f, 1.0f,};
+    float[] specular = {1.0f, 1.0f, 1.0f, 1.0f,};
+    float[] lightPosition = {0.5f, 0.5f, 0.5f, 0.0f,};
+
+
+    float[] materialAmb = {0.4f, 0.4f, 1.0f, 1.0f};
+    float[] materialDiff = {0.0f, 0.0f, 1.0f, 1.0f};//漫反射设置蓝色
+    float[] materialSpec = {1.0f, 0.5f, 0.0f, 1.0f};
+
+
+
     public GLRenderer(Context context) {
         try {
 
@@ -112,6 +124,33 @@ public class GLRenderer implements GLSurfaceView.Renderer {
         //r是半径，不是直径，因此用0.5/r可以算出放缩比例
         mScalef = 0.5f / r;
         mCenterPoint = model.getCenterPoint();
+        openLight(gl);
+        enableMaterial(gl);
+    }
+
+
+    public void openLight(GL10 gl){
+
+        gl.glEnable(GL10.GL_LIGHTING);
+        gl.glEnable(GL10.GL_LIGHT0);
+
+        gl.glLightfv(GL10.GL_LIGHT0,GL10.GL_AMBIENT,Util.floatToBuffer(ambient));
+        gl.glLightfv(GL10.GL_LIGHT0,GL10.GL_DIFFUSE,Util.floatToBuffer(diffuse));
+        gl.glLightfv(GL10.GL_LIGHT0,GL10.GL_SPECULAR,Util.floatToBuffer(specular));
+        gl.glLightfv(GL10.GL_LIGHT0,GL10.GL_POSITION,Util.floatToBuffer(lightPosition));
+
+
+    }
+
+    public void enableMaterial(GL10 gl) {
+
+        //材料对环境光的反射情况
+        gl.glMaterialfv(GL10.GL_FRONT_AND_BACK, GL10.GL_AMBIENT, Util.floatToBuffer(materialAmb));
+        //散射光的反射情况
+        gl.glMaterialfv(GL10.GL_FRONT_AND_BACK, GL10.GL_DIFFUSE, Util.floatToBuffer(materialDiff));
+        //镜面光的反射情况
+        gl.glMaterialfv(GL10.GL_FRONT_AND_BACK, GL10.GL_SPECULAR, Util.floatToBuffer(materialSpec));
+
     }
 
 
