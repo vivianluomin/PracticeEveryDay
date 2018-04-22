@@ -8,6 +8,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -16,7 +17,7 @@ import android.widget.LinearLayout;
  * Created by asus1 on 2018/4/21.
  */
 
-public class MatrixView extends FrameLayout {
+public class MatrixView extends View {
 
     private Context mContext;
     private Bitmap bitmap;
@@ -57,20 +58,26 @@ public class MatrixView extends FrameLayout {
     }
 
     public void translate(int x,int y){
-        matrix.reset();
+        //matrix.reset();
         matrix.setTranslate(x,y);
         postInvalidate();
     }
 
-    public void scale(int sx,int sy){
+    public void scale(float sx,float sy){
         matrix.reset();
         matrix.setScale(sx,sy);
         postInvalidate();
     }
 
-    public void scale(int sx,int sy,int px,int py){
+    public void scale(float sx,float sy,float px,float py){
         matrix.reset();
         matrix.setScale(sx,sy,px,py);
+        postInvalidate();
+    }
+
+    public void rotate(int degree,float px,float py){
+        matrix.reset();
+        matrix.setRotate(degree,bitmap.getWidth()*px,bitmap.getHeight()*py);
         postInvalidate();
     }
 
@@ -80,25 +87,61 @@ public class MatrixView extends FrameLayout {
       postInvalidate();
   }
 
-    public void sinSoc (int sin,int cos,int px,int py){
+    public void sinSoc (float sin,float cos,float px,float py){
         matrix.reset();
-        matrix.setSinCos(sin,cos,px,py);
+        matrix.setSinCos(sin,cos,bitmap.getWidth()*px,bitmap.getHeight()*py);
         postInvalidate();
     }
 
-    public void setSkew(int kx,int ky){
+    public void setSkew(float kx,float ky){
         matrix.reset();
         matrix.setSkew(kx,ky);
         postInvalidate();
     }
 
-    public void setSkew(int kx,int ky,int px,int py){
+    public void setSkew(float kx,float ky,int px,int py){
         matrix.reset();
         matrix.setSkew(kx,ky,px,py);
         postInvalidate();
     }
 
+    public void setPoly(){
+        matrix.reset();
+//        float src[] = {0,0};
+//        float dts[] = {300,300};
 
+        int bw = bitmap.getWidth();
+        int bh = bitmap.getHeight();
+//        float[] src = {bw / 2, bh / 2, bw, 0};
+//        float[] dst = {bw / 2, bh / 2, bw / 2 + bh / 2, bh / 2 + bw / 2};
+//        float[] src = {bw / 2, bh / 2, bw, 0};
+//        float[] dst = {bw / 4, bh / 4, bw / 2 , 0};
+//        float[] src = {0,0, 0,bh,bw,bh};
+//        float[] dst = {0,0,200,bh,bw+200,bh};
+
+        float[] src = {0,0, bw,0,0,bh,bw,bh};
+        float[] dst = {100,0,bw-100,0,0,bh,bw,bh};
+        matrix.setPolyToPoly(src,0,dst,0,4);
+    }
+
+
+    public void setInvert(){
+//        int bw = bitmap.getWidth();
+//        int bh = bitmap.getHeight();
+//        matrix.reset();
+//        matrix.setScale(-1,1);
+//        matrix.postTranslate(bw,0);
+
+        matrix.reset();
+        float[] values = {
+                1,0,400,
+                0,1,400,
+                0.05f,0f,1
+        };
+        matrix.setValues(values);
+
+        postInvalidate();
+    }
 
 
 }
