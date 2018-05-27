@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <rotate android:fromDegrees="-20"
+            android:pivotX="0"
+            android:pivotY="0">
+            <bitmap android:src="@drawable/kapian"/>
+        </rotate>
+
+    </item>
+
+    <item>
+        <rotate android:fromDegrees="20"
+            android:pivotY="0"
+            android:pivotX="0">
+
+            <bitmap android:src="@drawable/kapian"/>
+        </rotate>
+
+    </item>
+
+    <item>
+        <rotate
+            android:fromDegrees="40"
+            android:pivotX="0"
+            android:pivotY="0"
+            >
+            <bitmap android:src="@drawable/kapian"/>
+        </rotate>
+    </item>
+
+</layer-list>

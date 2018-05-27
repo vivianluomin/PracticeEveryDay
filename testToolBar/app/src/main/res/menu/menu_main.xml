@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+    <item
+        android:id="@+id/action_edit"
+        android:icon="@drawable/bendiyinyue2"
+        android:orderInCategory="80"
+        android:title="aaaa"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_share"
+        android:icon="@drawable/bendiyinyue2"
+        android:orderInCategory="90"
+        android:title="share"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_overflow"
+        android:orderInCategory="100"
+        android:title="more"
+        android:icon="@drawable/bendiyinyue2"
+        app:showAsAction="always" />
+
+
+</menu>
