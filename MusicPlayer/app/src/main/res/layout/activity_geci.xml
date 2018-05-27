@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/imgbg"
+    >
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/geci_tool"
+        >
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <!--<vivian.com.musicplayer.WordView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/text"-->
+        <!--android:layout_below="@id/geci_tool"-->
+        <!--/>-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="没有本地歌词，点击下载"
+        android:gravity="center"
+        android:textColor="#fff"
+        android:id="@+id/lrc_xiazai"
+        android:visibility="gone"
+
+        />
+
+
+</RelativeLayout>

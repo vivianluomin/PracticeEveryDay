@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <bitmap android:src="@drawable/angrybirds"
+            android:gravity="center"
+            />
+
+    </item>
+
+    <item  android:left="35dp"
+        android:top="35dp"
+        >
+        <bitmap android:src="@drawable/angrybirds"
+            android:gravity="center"
+            />
+
+    </item>
+
+    <item android:left="70dp"
+        android:top="70dp">
+        <bitmap android:src="@drawable/angrybirds"
+            android:gravity="center"
+            />
+
+    </item>
+
+</layer-list>

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="vivian.com.musicplayer.MainActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/toolbar"
+        android:background="#fff"
+        >
+        <RelativeLayout
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:layout_gravity = "center_horizontal"
+            >
+
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/bendiyinyue"
+                android:src="@drawable/yinyue1"
+                android:layout_margin="10dp"
+
+
+                />
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:id="@+id/wangluosousuo"
+                android:src="@drawable/wangluo1"
+                android:layout_centerHorizontal="true"
+                />
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:id="@+id/sousuo"
+                android:src="@drawable/sousuo1"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="100dp"
+                />
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.Toolbar>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:orientation="vertical"
+        >
+
+
+
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      >
+
+      <ImageView
+          android:layout_width="30dp"
+          android:layout_height="30dp"
+          android:layout_gravity="center_vertical"
+          android:layout_margin="5dp"
+          android:gravity = "center"
+          android:src="@drawable/bendiyinyue2"
+          />
+
+      <TextView
+          android:layout_width="0dp"
+          android:layout_height="30dp"
+          android:layout_weight="1"
+          android:id="@+id/bendiyinyue_text"
+          android:layout_margin = "5dp"
+          android:layout_gravity="center_vertical"
+          android:gravity="center|left"
+          android:textSize="18sp"
+          android:text="本地音乐"
+          android:textStyle="italic"
+          />
+
+  </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:gravity = "center"
+            android:src="@drawable/zuijinbofang"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:layout_margin = "5dp"
+            android:id="@+id/zuijinpofang_text"
+            android:layout_gravity="center_vertical"
+            android:gravity="center|left"
+            android:textSize="18sp"
+            android:text="最近播放"
+            android:textStyle="italic"
+            />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="5dp"
+            android:gravity = "center"
+            android:src="@drawable/xaizaiguanli"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:layout_margin = "5dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center|left"
+            android:id="@+id/xiazaiguanli_text"
+            android:textSize="18sp"
+            android:text="下载管理"
+            android:textStyle="italic"
+            />
+
+    </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bofang_layout"
+        android:layout_alignParentBottom = "true"
+        android:background="@drawable/beijing1"
+
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bofang_layout_item"
+            >
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:id="@+id/fengmian"
+                android:layout_margin="5dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+
+                />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_toRightOf="@id/fengmian"
+                android:layout_centerVertical="true"
+                android:layout_margin="5dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/bofang_name"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+
+
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/bofang_artist"
+                    android:textSize="12sp"
+
+                    />
+
+
+            </LinearLayout>
+
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/bofang_button"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/zanting2"
+                android:layout_marginRight="10dp"
+                />
+
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

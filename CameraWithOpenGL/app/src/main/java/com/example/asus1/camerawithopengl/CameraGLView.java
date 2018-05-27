@@ -137,6 +137,7 @@ public class CameraGLView extends GLSurfaceView {
         parameters.setPreviewSize(PreviewWidth,PreviewHeight);
         mCamera.setDisplayOrientation(90);
         mCamera.setParameters(parameters);
+
     }
 
     @Override

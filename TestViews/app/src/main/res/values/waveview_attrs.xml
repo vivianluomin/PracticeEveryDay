@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="WaveView">
+        <attr name="Mode" format="enum">
+            <enum name="cicle" value="0"/>
+            <enum name="triangle" value="1"/>
+        </attr>
+
+        <attr name="WaveCount" format="integer"/>
+        <attr name="WaveWidth" format="integer"/>
+        <attr name="android:color"/>
+
+    </declare-styleable>
+</resources>

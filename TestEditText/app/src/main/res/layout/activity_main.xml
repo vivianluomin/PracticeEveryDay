@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.asus1.testedittext.MainActivity"
+    android:id="@+id/relative"
+    >
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/listview"
+        />
+
+    <com.example.asus1.testedittext.InputMethodListLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/inputlayout"
+        >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="#b0b0b0"
+                >
+            <EditText
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:id="@+id/edit"
+                android:layout_marginTop="10dp"
+                android:background="#fff"
+                android:layout_marginStart="5dp"
+
+                />
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/text_replay"
+                android:text="回复"
+                android:textColor="#000"
+                android:layout_toEndOf="@id/edit"
+                android:textSize="24sp"
+                android:layout_marginTop="15dp"
+                />
+        </LinearLayout>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+    </ScrollView>
+
+</com.example.asus1.testedittext.InputMethodListLayout>
+
+
+
+</LinearLayout>
