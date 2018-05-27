@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_intent_music"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="vivian.com.musicplayer.IntentMusicActivity">
+
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/toolbar"
+        android:background="#fff"
+        >
+        <RelativeLayout
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:layout_gravity = "center_horizontal"
+            >
+
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/bendiyinyue"
+                android:src="@drawable/yinyue1"
+                android:layout_margin="10dp"
+
+                />
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:id="@+id/wangluosousuo"
+                android:src="@drawable/wangluo1"
+                android:layout_centerHorizontal="true"
+                />
+            />
+            <ImageButton
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:id="@+id/sousuo"
+                android:src="@drawable/sousuo1"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="100dp"
+                />
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.design.widget.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tab_layout"
+        android:background="@drawable/table"
+        app:tabIndicatorColor="#fa8072"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="#fa8072"
+        app:tabTextColor="#a8a8a8"
+
+
+        />
+
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pager"
+        >
+
+
+    </android.support.v4.view.ViewPager>
+
+
+</LinearLayout>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--这种方式拿到的是带有缩放的效果，即便给item 设置了gravity 并且从模拟器上看到的效果是不缩放的，但是真机上依旧是缩放的效果-->
+    <item android:drawable="@drawable/angrybirds">
+    </item>
+    <item android:drawable="@drawable/angrybirds"
+        android:left="45dp"
+        android:top="45dp">
+    </item>
+    <item android:drawable="@drawable/angrybirds"
+        android:left="90dp"
+        android:top="90dp">
+    </item>
+</layer-list>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--底层的左边距离上层左边3dp, 底层的顶部，距离上层的顶部6dp -->
+   <item  android:left="3dp"
+          android:top="6dp"
+       >
+       <shape>
+            <solid   android:color="#b4b5b6"/>
+       </shape>
+
+   </item>
+
+    <item android:bottom="6dp"
+        android:right="3dp"
+        >
+        <shape>
+            <solid android:color="#fff"/>
+        </shape>
+
+    </item>
+
+
+</layer-list>
