@@ -1,0 +1,32 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="AppTheme.Base"></style>
+
+    <style name="AppTheme.Base" parent="Theme.AppCompat">
+        <!--将ActionBar隐藏,这里使用ToolBar-->
+        <item name="windowActionBar">false</item>
+        <!-- 使用 API Level 22以上编译的话，要拿掉前綴字 -->
+        <item name="windowNoTitle">true</item>
+        <!--colorPrimaryDark对应状态栏的颜色-->
+        <item name="colorPrimaryDark">@color/statusColor</item>
+        <!--colorPrimary 对应ToolBar的颜色-->
+        <item name="colorPrimary">@color/toolBarColor</item>
+        <!--colorAccent 对应EditText编辑时、RadioButton选中、CheckBox等选中时的颜色。-->
+        <item name="colorAccent">@color/editColor</item>
+        <!--窗口的颜色-->
+        <item name="android:windowBackground">@color/widowColor</item>
+
+    </style>
+
+    <!--Status bar color-->
+    <color name="statusColor">#ff0000</color>
+    <!-- toolBar color -->
+    <color name="toolBarColor">#0000ff</color>
+    <!--EditText,RadioButton,CheckBox color-->
+    <color name="editColor">#FD87A9</color>
+    <!--Window color-->
+    <color name="widowColor">#ffffff</color>
+
+</resources>

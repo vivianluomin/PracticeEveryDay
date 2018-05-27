@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">WIFIConnection</string>
+    <string name="wifi">WIFI</string>
+</resources>

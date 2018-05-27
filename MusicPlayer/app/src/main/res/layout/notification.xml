@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="200dp">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:id="@+id/tubiao_bitmap"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="10dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tubiao_title"
+        android:layout_toEndOf="@id/tubiao_bitmap"
+        android:textSize="18sp"
+        android:text="qqqqqq"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tubiao_artist"
+        android:text="aaaa"
+        android:layout_marginRight="20dp"
+        android:textSize="12sp"
+        android:layout_toEndOf="@id/tubiao_title"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/relative"
+        android:layout_toEndOf="@id/tubiao_bitmap"
+        android:layout_below="@id/tubiao_title"
+        >
+        <ImageButton
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/up2"
+            android:layout_margin="10dp"
+            android:layout_centerVertical="true"
+            android:id="@+id/tubiao_zuo"
+            />
+        <ImageButton
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/zanting2"
+            android:layout_margin="10dp"
+            android:id="@+id/tubiao_zanting"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            />
+        <ImageButton
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/next2"
+            android:layout_margin="10dp"
+            android:id="@+id/tubiao_you"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            />
+
+    </RelativeLayout>
+
+</RelativeLayout>
