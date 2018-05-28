@@ -26,10 +26,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mGLSurfaceView = new CameraGLView(this);
-        mGLSurfaceView.setEGLContextClientVersion(2);
-        mGLSurfaceView.setRenderer(new CameraRenderer(mGLSurfaceView));
-        setContentView(mGLSurfaceView);
+//        mGLSurfaceView = new CameraGLView(this);
+////        mGLSurfaceView.setEGLContextClientVersion(2);
+////        mGLSurfaceView.setRenderer(new CameraRenderer(mGLSurfaceView));
+
+        GLSurfaceView glSurfaceView = new GLSurfaceView(this);
+        glSurfaceView.setEGLContextClientVersion(2);
+        glSurfaceView.setRenderer(new MyRenderer());
+        setContentView(glSurfaceView);
 
 
     }
