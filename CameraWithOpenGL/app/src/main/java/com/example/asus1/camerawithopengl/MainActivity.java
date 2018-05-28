@@ -2,6 +2,7 @@ package com.example.asus1.camerawithopengl;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.media.tv.TvContract;
@@ -13,6 +14,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -31,9 +33,12 @@ public class MainActivity extends AppCompatActivity {
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
+    private ImageView mImageView;
     private static final String TAG = "MainActivity";
 
     private CameraPreview mPreview;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 //        glSurfaceView.setRenderer(new MyRenderer());
         setContentView(R.layout.activity_main);
         mPreview = (CameraPreview)findViewById(R.id.surface);
+        mImageView = (ImageView)findViewById(R.id.image);
         requestPremission();
 
 
@@ -58,6 +64,10 @@ public class MainActivity extends AppCompatActivity {
         mPreview.destoryCamera();
         super.onDestroy();
 
+    }
+
+    public void setImage(Bitmap bitmap){
+        mImageView.setImageBitmap(bitmap);
     }
 
     private void requestPremission(){

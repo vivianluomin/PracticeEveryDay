@@ -2,18 +2,27 @@ package com.example.asus1.camerawithopengl;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.ImageFormat;
+import android.graphics.Matrix;
 import android.graphics.PixelFormat;
+import android.graphics.Rect;
+import android.graphics.YuvImage;
 import android.hardware.Camera;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.Size;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.WindowManager;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback{
+public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback,
+        Camera.PreviewCallback{
 
     private Camera mCamera;
     private SurfaceHolder mHolder;
@@ -69,6 +78,32 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
     }
 
+    @Override
+    public void onPreviewFrame(byte[] data, Camera camera) {
+        Camera.Size size = camera.getParameters().getPreviewSize();
+        YuvImage i = new YuvImage(data, ImageFormat.NV21,size.width,size.height,null);
+        if(i!=null){
+            Log.d(TAG, "onPreviewFrame: ");
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            i.compressToJpeg(new Rect(0,0,size.width,size.height),
+                    80,stream);
+            Bitmap bitmap = BitmapFactory.
+                    decodeByteArray(stream.toByteArray(),0,stream.size());
+            rotateMyBitmap(bitmap);
+
+        }
+
+    }
+
+    private void rotateMyBitmap(Bitmap bitmap){
+        Matrix matrix = new Matrix();
+        matrix.postRotate(90);
+        Bitmap bit =
+                Bitmap.createBitmap(bitmap,
+                        0,0,bitmap.getWidth(),bitmap.getHeight(),matrix,true);
+        Log.d(TAG, "rotateMyBitmap: "+bit.getHeight());
+    }
+
     public void destoryCamera(){
         if(mCamera!=null){
             if(isPreviwing){
@@ -98,6 +133,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         if(mCamera == null){
             mCamera = Camera.open(1);
             setCameraDisplayOrientation(mContext,1,mCamera);
+            mCamera.setPreviewCallback(this);
 
         }
             mCamera.setPreviewDisplay(mHolder);
