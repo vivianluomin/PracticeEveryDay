@@ -14,6 +14,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.widget.ImageView;
 
 import java.io.IOException;
@@ -38,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
     private CameraPreview mPreview;
 
+    private GLRenderer glRenderer;
+
 
 
     @Override
@@ -51,9 +55,29 @@ public class MainActivity extends AppCompatActivity {
 //        glSurfaceView.setEGLContextClientVersion(2);
 //        glSurfaceView.setRenderer(new MyRenderer());
         setContentView(R.layout.activity_main);
-        mPreview = (CameraPreview)findViewById(R.id.surface);
-        mImageView = (ImageView)findViewById(R.id.image);
-        requestPremission();
+//        mPreview = (CameraPreview)findViewById(R.id.surface);
+//        mImageView = (ImageView)findViewById(R.id.image);
+//        requestPremission();
+
+        SurfaceView surfaceView = (SurfaceView)findViewById(R.id.surface);
+        glRenderer = new GLRenderer();
+        glRenderer.start();
+        surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
+            @Override
+            public void surfaceCreated(SurfaceHolder holder) {
+
+            }
+
+            @Override
+            public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+                    glRenderer.render(holder.getSurface(),width,height);
+            }
+
+            @Override
+            public void surfaceDestroyed(SurfaceHolder holder) {
+
+            }
+        });
 
 
 
@@ -61,7 +85,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        mPreview.destoryCamera();
+       // mPreview.destoryCamera();
+        glRenderer.release();
+        glRenderer = null;
         super.onDestroy();
 
     }
@@ -94,14 +120,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         Log.d(TAG, "onPause: ");
-        mPreview.stopCamera();
+      //  mPreview.stopCamera();
         super.onPause();
     }
 
     @Override
     protected void onRestart() {
         Log.d(TAG, "onRestart: ");
-        openCamera();
+       // openCamera();
         super.onRestart();
     }
     
