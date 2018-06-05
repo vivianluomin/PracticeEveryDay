@@ -8,16 +8,20 @@ import android.opengl.EGLSurface;
 import android.opengl.GLES20;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.support.annotation.NonNull;
+import android.util.EventLog;
 import android.util.Log;
 import android.view.Surface;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
 
-public class GLRenderer extends HandlerThread {
-
-    private static final String TAG = "GLRenderer";
+public class GLRenderer extends HandlerThread{
+    private static final String TAG = "GLThread";
     private EGLConfig eglConfig = null;
     private EGLDisplay eglDisplay = EGL14.EGL_NO_DISPLAY;
     private EGLContext eglContext = EGL14.EGL_NO_CONTEXT;
@@ -26,55 +30,54 @@ public class GLRenderer extends HandlerThread {
     private int vPosition;
     private int uColor;
 
-
     public GLRenderer() {
         super("GLRenderer");
     }
 
+    /**
+     * 创建OpenGL环境
+     */
     private void createGL(){
+        // 获取显示设备(默认的显示设备)
         eglDisplay = EGL14.eglGetDisplay(EGL14.EGL_DEFAULT_DISPLAY);
-
-        int[] version = new int[2];
+        // 初始化
+        int []version = new int[2];
         if (!EGL14.eglInitialize(eglDisplay, version,0,version,1)) {
             throw new RuntimeException("EGL error "+EGL14.eglGetError());
         }
-
-        int[] configAttribs = {
-                EGL14.EGL_BUFFER_SIZE,32,
-                EGL14.EGL_ALPHA_SIZE,8,
-                EGL14.EGL_BLUE_SIZE,8,
-                EGL14.EGL_GREEN_SIZE,8,
-                EGL14.EGL_RED_SIZE,8,
-                EGL14.EGL_RENDERABLE_TYPE,EGL14.EGL_OPENGL_ES2_BIT,
-                EGL14.EGL_SURFACE_TYPE,EGL14.EGL_WINDOW_BIT,
-                EGL14.EGL_NONE
-        };//获取framebuffer格式和能力
-
-        int[] numConfigs = new int[1];
-        EGLConfig[] configs = new EGLConfig[1];
-
-        if (!EGL14.eglChooseConfig(eglDisplay, configAttribs,0, configs,
-                0,configs.length, numConfigs,0)) {
-            throw new RuntimeException("EGL error "+EGL14.eglGetError());
-        }
-
-        eglConfig = configs[0];
-
-
-        //创建OpenGL上下文
-        int[] contextAttribs = {
-                EGL14.EGL_CONTEXT_CLIENT_VERSION,2,
+        // 获取FrameBuffer格式和能力
+        int []configAttribs = {
+                EGL14.EGL_BUFFER_SIZE, 32,
+                EGL14.EGL_ALPHA_SIZE, 8,
+                EGL14.EGL_BLUE_SIZE, 8,
+                EGL14.EGL_GREEN_SIZE, 8,
+                EGL14.EGL_RED_SIZE, 8,
+                EGL14.EGL_RENDERABLE_TYPE, EGL14.EGL_OPENGL_ES2_BIT,
+                EGL14.EGL_SURFACE_TYPE, EGL14.EGL_WINDOW_BIT,
                 EGL14.EGL_NONE
         };
-        eglContext = EGL14.eglCreateContext(eglDisplay,eglConfig,EGL14.EGL_NO_CONTEXT,contextAttribs,0);
-
+        int []numConfigs = new int[1];
+        EGLConfig[]configs = new EGLConfig[1];
+        if (!EGL14.eglChooseConfig(eglDisplay, configAttribs,0, configs, 0,configs.length, numConfigs,0)) {
+            throw new RuntimeException("EGL error "+EGL14.eglGetError());
+        }
+        eglConfig = configs[0];
+        // 创建OpenGL上下文
+        int []contextAttribs = {
+                EGL14.EGL_CONTEXT_CLIENT_VERSION, 2,
+                EGL14.EGL_NONE
+        };
+        eglContext = EGL14.eglCreateContext(eglDisplay, eglConfig, EGL14.EGL_NO_CONTEXT, contextAttribs,0);
         if(eglContext== EGL14.EGL_NO_CONTEXT) {
             throw new RuntimeException("EGL error "+EGL14.eglGetError());
         }
     }
 
-    private void destoryGL(){
-        EGL14.eglDestroyContext(eglDisplay,eglContext);
+    /**
+     * 销毁OpenGL环境
+     */
+    private void destroyGL(){
+        EGL14.eglDestroyContext(eglDisplay, eglContext);
         eglContext = EGL14.EGL_NO_CONTEXT;
         eglDisplay = EGL14.EGL_NO_DISPLAY;
     }
@@ -95,11 +98,13 @@ public class GLRenderer extends HandlerThread {
         new Handler(getLooper()).post(new Runnable() {
             @Override
             public void run() {
-                destoryGL();
+                destroyGL();
                 quit();
             }
         });
     }
+
+
 
     /**
      * 加载制定shader的方法
@@ -129,7 +134,6 @@ public class GLRenderer extends HandlerThread {
         }
         return shader;
     }
-
 
     /**
      * 创建shader程序的方法
@@ -197,6 +201,7 @@ public class GLRenderer extends HandlerThread {
         return vertexBuf;
     }
 
+
     public void render(Surface surface, int width, int height){
         final int[] surfaceAttribs = { EGL14.EGL_NONE };
         EGLSurface eglSurface = EGL14.eglCreateWindowSurface(eglDisplay, eglConfig, surface, surfaceAttribs, 0);
@@ -249,6 +254,4 @@ public class GLRenderer extends HandlerThread {
             + "void main(){                     \n"
             + "   gl_FragColor = uColor;        \n" // 给此片元的填充色
             + "}";
-
-
 }
