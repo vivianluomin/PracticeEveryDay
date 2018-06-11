@@ -11,8 +11,18 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         ndk {
-            moduleName "JNISample"
+            moduleName "JNITestSample"
+            abiFilters "armeabi", "armeabi-v7a", "x86" //输出指定三种平台下的so库
+            ldLibs "log", "jnigraphics", "android"    //jni中需要用到的其它库
+            stl "gnustl_shared"
 
+        }
+
+        sourceSets {
+            main {
+                jni.srcDirs = []
+                jniLibs.srcDirs 'src/main/libs'
+            }
         }
     }
     buildTypes {
@@ -21,6 +31,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {

@@ -2,5 +2,12 @@ package com.example.asus1.learnjniandndk;
 
 public class JNIUtil {
 
-    public native String getWorld();
+    static {
+        System.loadLibrary("JNITestSample");
+    }
+
+    public static native String getWorld();
+
+
+    public static native int getInt();
 }
