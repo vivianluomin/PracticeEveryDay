@@ -105,6 +105,8 @@ public class Triangle {
 
     public void setXAngle(float degree){
         mxAngle += degree;
+
+
     }
 
 

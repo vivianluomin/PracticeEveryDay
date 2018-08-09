@@ -35,8 +35,8 @@ public class TraigelView  extends GLSurfaceView{
            GLES30.glClearColor(1,1,1,1.0f);//设置屏幕背景色
            mTriangle = new Triangle();
            GLES30.glEnable(GLES30.GL_DEPTH_TEST);
-           mThread = new RotateThread();
-           mThread.start();
+          // mThread = new RotateThread();
+          // mThread.start();
 
        }
 
