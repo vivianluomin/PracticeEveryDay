@@ -1,5 +1,6 @@
 package com.example.asus1.learnopengl.shaders;
 
+import android.graphics.Matrix;
 import android.opengl.GLES30;
 
 import java.nio.ByteBuffer;
@@ -85,5 +86,7 @@ public class TriangleTexture {
         GLES30.glBindTexture(GLES30.GL_TEXTURE_2D,textId); //绑定指定的纹理id
 
         GLES30.glDrawArrays(GLES30.GL_TRIANGLES,0,mvCount);
+
+
     }
 }

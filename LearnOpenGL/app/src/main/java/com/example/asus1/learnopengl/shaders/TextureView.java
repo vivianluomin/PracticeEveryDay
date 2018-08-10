@@ -57,23 +57,27 @@ public class TextureView extends GLSurfaceView {
 
         private void initTexture(){
             int textures[] = new int[1]; //生成纹理id
-            GLES30.glGenTextures(
+
+            GLES30.glGenTextures(  //创建纹理对象
                     1, //产生纹理id的数量
                     textures, //纹理id的数组
                     0  //偏移量
                     );
             mTextureId = textures[0];
 
-            GLES30.glBindTexture(GLES30.GL_TEXTURE_2D,mTextureId);//绑定纹理id
+            //绑定纹理id，将对象绑定到环境的纹理单元
+            GLES30.glBindTexture(GLES30.GL_TEXTURE_2D,mTextureId);
 
             GLES30.glTexParameterf(GLES30.GL_TEXTURE_2D,
                     GLES30.GL_TEXTURE_MIN_FILTER,GLES30.GL_NEAREST);//设置MIN 采样方式
             GLES30.glTexParameterf(GLES30.GL_TEXTURE_2D,
                     GLES30.GL_TEXTURE_MAG_FILTER,GLES30.GL_LINEAR);//设置MAG采样方式
-            GLES30.glTexParameterf(GLES30.GL_TEXTURE_2D,
-                    GLES30.GL_TEXTURE_WRAP_S,GLES30.GL_CLAMP_TO_EDGE);//设置S轴拉伸方式
-            GLES30.glTexParameterf(GLES30.GL_TEXTURE_2D,
-                    GLES30.GL_TEXTURE_WRAP_T,GLES30.GL_CLAMP_TO_EDGE);//设置T轴拉伸方式
+ //           GLES30.glTexParameterf(GLES30.GL_TEXTURE_2D,
+//                    GLES30.GL_TEXTURE_WRAP_S,GLES30.GL_CLAMP_TO_EDGE);//设置S轴拉伸方式
+//            GLES30.glTexParameterf(GLES30.GL_TEXTURE_2D,
+//                    GLES30.GL_TEXTURE_WRAP_T,GLES30.GL_CLAMP_TO_EDGE);//设置T轴拉伸方式
+
+            repeatSample();
 
             //加载图片
             Bitmap bitmap = BitmapFactory.decodeResource(
@@ -88,5 +92,12 @@ public class TextureView extends GLSurfaceView {
             bitmap.recycle();
 
         }
+    }
+
+    private void repeatSample(){
+        GLES30.glTexParameterf(GLES30.GL_TEXTURE_2D,
+                GLES30.GL_TEXTURE_WRAP_S,GLES30.GL_REPEAT);
+        GLES30.glTexParameterf(GLES30.GL_TEXTURE_2D,
+                GLES30.GL_TEXTURE_WRAP_T,GLES30.GL_REPEAT);
     }
 }
