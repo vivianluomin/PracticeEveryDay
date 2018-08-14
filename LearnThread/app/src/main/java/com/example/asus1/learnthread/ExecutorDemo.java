@@ -1,10 +1,13 @@
 package com.example.asus1.learnthread;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class ExecutorDemo {
 
@@ -13,7 +16,8 @@ public class ExecutorDemo {
     public static void main(String[] args){
 
         try {
-            fixedThreadPool(3);
+           // fixedThreadPool(3);
+            scheduldPoolThread();
         }catch (Exception e){
 
         }
@@ -44,4 +48,59 @@ public class ExecutorDemo {
         return fibc(num-1)+fibc(num-2);
     }
 
+    private static void scheduldPoolThread() throws CancellationException{
+
+        final long last = System.currentTimeMillis();
+        ScheduledExecutorService executorService = Executors.newScheduledThreadPool(3);
+
+
+        //循环任务，按照上一次任务的发起时间计算下一次任务的开始时间
+        executorService.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Thread: "+Thread.currentThread().getName()
+                +" ,定时计算; "+System.currentTimeMillis());
+                System.out.println("结果："+(System.currentTimeMillis()-last));
+            }
+        },1,2, TimeUnit.SECONDS);
+        executorService.scheduleAtFixedRate(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Thread: "+Thread.currentThread().getName()
+                        +" ,定时计算2; "+System.currentTimeMillis());
+                System.out.println("结果2："+(System.currentTimeMillis()-last));
+            }
+        },1,2, TimeUnit.SECONDS);
+
+
+        //延时任务
+        executorService.schedule(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Thread: "
+                        +Thread.currentThread().getName()+"-延时定时；");
+                System.out.println("延时结果："+(System.currentTimeMillis()-last));
+            }
+        },1,TimeUnit.SECONDS);
+
+
+        //循环结果，以上一次任务的结束时间计算下一次任务的开始时间
+        executorService.scheduleWithFixedDelay(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Thread: "+Thread.currentThread().getName()
+                        +" ,定时计算1; "+System.currentTimeMillis());
+                System.out.println("结果1："+(System.currentTimeMillis()-last));
+            }
+        },1,1,TimeUnit.SECONDS);
+
+        executorService.scheduleWithFixedDelay(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Thread: "+Thread.currentThread().getName()
+                        +" ,定时计算2; "+System.currentTimeMillis());
+                System.out.println("结果2："+(System.currentTimeMillis()-last));
+            }
+        },1,1,TimeUnit.SECONDS);
+    }
 }
