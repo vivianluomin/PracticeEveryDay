@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".RemoteService"
+        <service android:name=".SecondService"
             android:process=":remote"
             android:exported="true"
             >
