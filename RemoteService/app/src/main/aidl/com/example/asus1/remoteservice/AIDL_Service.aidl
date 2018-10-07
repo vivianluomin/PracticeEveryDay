@@ -3,6 +3,7 @@ package com.example.asus1.remoteservice;
 
 // Declare any non-default types here with import statements
 import com.example.asus1.remoteservice.AIDL_Activity;
+import com.example.asus1.remoteservice.MSG;
 
 interface AIDL_Service {
     /**
@@ -10,7 +11,7 @@ interface AIDL_Service {
      * and return values in AIDL.
      */
 
-    void sendMessage();
+    void sendMessage(in MSG msg);
 
     void registerListener(AIDL_Activity lisntener);
 

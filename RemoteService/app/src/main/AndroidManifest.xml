@@ -17,9 +17,8 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".SecondService"
+        <service android:name=".BinderPoolService"
             android:process=":remote"
-            android:exported="true"
             >
 
 

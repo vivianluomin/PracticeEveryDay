@@ -19,8 +19,8 @@ public class AidlBinder extends AIDL_Service.Stub {
     private static final String TAG = "RemoteService";
 
     @Override
-    public void sendMessage()throws RemoteException {
-        Log.d(TAG, "sendMessage: "+"通信了");
+    public void sendMessage(MSG msg)throws RemoteException {
+        Log.d(TAG, "sendMessage: "+"通信了  "+msg.msg);
         for(int i = 0;i<mListeners.size();i++){
             mListeners.get(i).onRespond("message from service");
         }
