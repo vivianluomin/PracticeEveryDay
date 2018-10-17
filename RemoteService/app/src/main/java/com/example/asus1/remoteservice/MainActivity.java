@@ -1,8 +1,11 @@
 package com.example.asus1.remoteservice;
 
+import android.app.IntentService;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Handler;
 import android.os.IBinder;
@@ -13,6 +16,9 @@ import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+
+import java.lang.invoke.MethodHandle;
 
 public class MainActivity extends AppCompatActivity implements Handler.Callback {
 
@@ -87,6 +93,8 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback 
     private IRect mRect;
     private Handler mHander = new Handler(this);
 
+    public static String BROCAST_MSG = "FINISH";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,34 +102,59 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback 
 
 //        Intent intent = new Intent(this,RemoteService.class);
 //        bindService(intent,mConnection, Context.BIND_AUTO_CREATE);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                mBinderPool = BinderPool.getInstance(MainActivity.this);
-                Log.d(TAG, "run: 11111111111");
-                mHander.obtainMessage().sendToTarget();
-                Log.d(TAG, "run: 22222222222222222");
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                mBinderPool = BinderPool.getInstance(MainActivity.this);
+//                Log.d(TAG, "run: 11111111111");
+//                mHander.obtainMessage().sendToTarget();
+//                Log.d(TAG, "run: 22222222222222222");
+//            }
+//        }).start();
 
+        registerReceiver(broadcastReceiver,new IntentFilter(BROCAST_MSG));
+
+        findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(
+                        MainActivity.this,HandlerService.class);
+                intent.putExtra("path","http://www:xxx.xxx");
+                //bindService(intent,mHandlerConnection,BIND_AUTO_CREATE);
+                startService(intent);
+            }
+        });
 
 
 
     }
 
+    private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if(intent!=null){
+                if(intent.getAction()!=null&&intent.getAction().equals(BROCAST_MSG)){
+                    System.out.println(intent.getStringExtra("path"));
+                }
+            }
+        }
+    };
+
     @Override
     public boolean handleMessage(Message msg) {
 
-        mCalculate = ICalculate.Stub.asInterface(mBinderPool.queryBidner
-                (BinderPool.BINDER_CALCULATE));
-        mRect = IRect.Stub.asInterface(mBinderPool.queryBidner(BinderPool.BINDER_RECT));
-        Log.d(TAG, "handleMessage: 333333333333333333333333");
-        try {
-            System.out.println(mCalculate.add(1,2));
-            System.out.println(mRect.area(2,4));
-        }catch (RemoteException e){
-            e.printStackTrace();
-        }
+//        mCalculate = ICalculate.Stub.asInterface(mBinderPool.queryBidner
+//                (BinderPool.BINDER_CALCULATE));
+//        mRect = IRect.Stub.asInterface(mBinderPool.queryBidner(BinderPool.BINDER_RECT));
+//        Log.d(TAG, "handleMessage: 333333333333333333333333");
+//        try {
+//            System.out.println(mCalculate.add(1,2));
+//            System.out.println(mRect.area(2,4));
+//        }catch (RemoteException e){
+//            e.printStackTrace();
+//        }
+
+        System.out.println((String) msg.obj);
         
         return false;
     }
@@ -129,7 +162,9 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback 
     @Override
     protected void onDestroy() {
         //unbindService(mConnection);
-        mBinderPool.unBinder();
+        //mBinderPool.unBinder();
+
+        unregisterReceiver(broadcastReceiver);
         super.onDestroy();
     }
 }
