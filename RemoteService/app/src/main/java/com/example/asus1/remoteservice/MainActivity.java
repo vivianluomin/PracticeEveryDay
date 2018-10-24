@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback 
 //        }
 //    }
 //
-//    private Messenger mClient = new Messenger(new ActivityHanlder());
-//    private Messenger mService;
+    //private Messenger mClient = new Messenger(new ActivityHanlder());
+    private Messenger mService;
 
     private ServiceConnection mConnection = new ServiceConnection() {
         @Override
